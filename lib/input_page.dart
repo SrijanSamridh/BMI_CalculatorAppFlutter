@@ -5,8 +5,8 @@ import 'reuse_container.dart';
 
 const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color(0xFFEB1555);
-const inactiveContainerColor = Color(0xFF1D1E33);
-const activeContainerColor = Color(0xFF111328);
+const activeContainerColor = Color(0xFF1D1E33);
+const inactiveContainerColor = Color(0xFF111328);
 const appBarColor = Color(0xff01011c);
 const fontColor = Color(0xFFD4D6E2);
 
@@ -23,23 +23,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveContainerColor;
-  Color femaleCardColor = inactiveContainerColor;
 
-  updateColor(Gender gender){
-    if(gender == Gender.male){
-      if(maleCardColor == inactiveContainerColor){
-        maleCardColor = activeContainerColor;
-        femaleCardColor = inactiveContainerColor;
-      }else{maleCardColor = activeContainerColor;}
-    }
-    if(gender == Gender.female){
-      if(femaleCardColor == inactiveContainerColor){
-        femaleCardColor = activeContainerColor;
-        maleCardColor = inactiveContainerColor;
-      }else{femaleCardColor = activeContainerColor;}
-    }
-  }
+  dynamic selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +47,11 @@ class _InputPageState extends State<InputPage> {
                       child: GestureDetector(
                       onTap: () {
                       setState(() {
-                        updateColor(Gender.male);
+                        selectedGender = Gender.male;
                       });
                     },
                     child: ReuseContainer(
-                      myColor: maleCardColor,
+                      myColor: selectedGender == Gender.male? activeContainerColor : inactiveContainerColor,
                       cardChild: const IconContent(
                         icon: FontAwesomeIcons.mars,
                         label: "MALE",
@@ -77,11 +62,11 @@ class _InputPageState extends State<InputPage> {
                       child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColor(Gender.female);
+                        selectedGender = Gender.female;
                       });
                     },
                     child: ReuseContainer(
-                      myColor: femaleCardColor,
+                      myColor: selectedGender == Gender.female? activeContainerColor : inactiveContainerColor,
                       cardChild: const IconContent(
                         icon: FontAwesomeIcons.venus,
                         label: "FEMALE",
