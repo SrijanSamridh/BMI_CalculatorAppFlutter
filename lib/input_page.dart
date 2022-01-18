@@ -8,6 +8,25 @@ class InputPage extends StatefulWidget {
 }
 
 
+class ReuseContainer extends StatelessWidget {
+
+  const ReuseContainer({Key? key, required this.myColor}) : super(key: key);
+  // const ReuseContainer({required this.myColor});
+  final Color myColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        // color: Color(0xFF1D1E33),
+        color: myColor,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+      ),
+    );
+  }
+}
+
 class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +43,7 @@ class _InputPageState extends State<InputPage> {
           children: [
             Expanded(
               child: Row(
-                children: [
+                children: const [
                   Expanded(child: ReuseContainer(myColor: Color(0xFF1D1E33),)),
                   Expanded(child: ReuseContainer(myColor: Color(0xFF1D1E33),)),
                 ],
@@ -32,14 +51,14 @@ class _InputPageState extends State<InputPage> {
             ),
             Expanded(
               child: Row(
-                children: [
+                children: const [
                   Expanded(child: ReuseContainer(myColor: Color(0xFF1D1E33),)),
                 ],
               ),
             ),
             Expanded(
               child: Row(
-                children: [
+                children: const [
                   Expanded(child: ReuseContainer(myColor: Color(0xFF1D1E33),)),
                   Expanded(child: ReuseContainer(myColor: Color(0xFF1D1E33),)),
                 ],
@@ -50,20 +69,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class ReuseContainer extends StatelessWidget {
-
-  ReuseContainer({required this.myColor});
-  final Color myColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        // color: Color(0xFF1D1E33),
-        color: myColor,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-    );
-  }
-}
