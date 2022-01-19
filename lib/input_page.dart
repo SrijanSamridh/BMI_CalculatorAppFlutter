@@ -2,18 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reuse_container.dart';
+import 'constants.dart';
 
-const bottomContainerHeight = 80.0;
-const bottomContainerColor = Color(0xFFEB1555);
-const activeContainerColor = Color(0xFF1D1E33);
-const inactiveContainerColor = Color(0xFF111328);
-const appBarColor = Color(0xff01011c);
-const fontColor = Color(0xFFD4D6E2);
-
-enum Gender{
-  male,
-  female
-}
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -23,14 +14,14 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
   dynamic selectedGender;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: appBarColor,
+          backgroundColor: kAppBarColor,
           title: const Text(
             'BMI CALCULATOR',
             style: TextStyle(
@@ -39,38 +30,39 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                      child: GestureDetector(
-                      onTap: () {
+                      child: ReuseContainer(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReuseContainer(
-                      myColor: selectedGender == Gender.male? activeContainerColor : inactiveContainerColor,
-                      cardChild: const IconContent(
-                        icon: FontAwesomeIcons.mars,
-                        label: "MALE",
-                      ),
+                    myColor: selectedGender == Gender.male
+                        ? kActiveContainerColor
+                        : kInactiveContainerColor,
+                    cardChild: const IconContent(
+                      icon: FontAwesomeIcons.mars,
+                      label: "MALE",
                     ),
                   )),
                   Expanded(
-                      child: GestureDetector(
-                    onTap: () {
+                      child: ReuseContainer(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReuseContainer(
-                      myColor: selectedGender == Gender.female? activeContainerColor : inactiveContainerColor,
-                      cardChild: const IconContent(
-                        icon: FontAwesomeIcons.venus,
-                        label: "FEMALE",
-                      ),
+                    myColor: selectedGender == Gender.female
+                        ? kActiveContainerColor
+                        : kInactiveContainerColor,
+                    cardChild: const IconContent(
+                      icon: FontAwesomeIcons.venus,
+                      label: "FEMALE",
                     ),
                   )),
                 ],
@@ -81,8 +73,33 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                       child: ReuseContainer(
-                    myColor: inactiveContainerColor,
-                    cardChild: Column(),
+                    onPress: () {},
+                    myColor: kInactiveContainerColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'HEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text( height.toString(),
+                              style: kNumberStyle,
+                            ),
+                            const Text('cm',style: kLabelTextStyle,),
+                          ],
+                        ),
+                        Slider(
+                          value: height.toDouble(),
+                          min: 180.0,
+                          max: 220.0, onChanged: (double value) {  },
+                        ),
+                      ],
+                    ),
                   )),
                 ],
               ),
@@ -92,21 +109,23 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                       child: ReuseContainer(
-                    myColor: inactiveContainerColor,
+                    onPress: () {},
+                    myColor: kInactiveContainerColor,
                     cardChild: Column(),
                   )),
                   Expanded(
                       child: ReuseContainer(
-                    myColor: inactiveContainerColor,
+                    onPress: () {},
+                    myColor: kInactiveContainerColor,
                     cardChild: Column(),
                   )),
                 ],
               ),
             ),
             Container(
-              color: bottomContainerColor,
+              color: kBottomContainerColor,
               margin: const EdgeInsets.only(top: 10.0),
-              height: bottomContainerHeight,
+              height: kBottomContainerHeight,
               width: double.infinity,
             ),
           ],
