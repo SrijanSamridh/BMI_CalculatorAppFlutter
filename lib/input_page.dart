@@ -147,14 +147,24 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             RoundIconButton(
+                              onPressed: (){
+                                setState(() {
+                                  weight--;
+                                });
+                              },
                               icon: FontAwesomeIcons.minus,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
                             RoundIconButton(
+                              onPressed: (){
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
                               icon: FontAwesomeIcons.plus,
                             ),
                           ],
@@ -179,15 +189,25 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children:[
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
+                              onPressed: (){
+                                setState(() {
+                                  age--;
+                                });
+                              },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
                             RoundIconButton(
                               icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
                             ),
                           ],
                         )
@@ -209,13 +229,15 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key, required this.icon}) : super(key: key);
+  const RoundIconButton({Key? key, required this.icon, required this.onPressed}) : super(key: key);
+  // const RoundIconButton({ this.onPressed})
   final IconData icon;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       child: Icon(icon),
-      onPressed: () {},
+      onPressed: onPressed,
       elevation: 6.0,
       constraints: const BoxConstraints.tightFor(
         width: 56.0,
