@@ -16,6 +16,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   dynamic selectedGender;
   int height = 180;
+  int weight = 80;
+  int age = 19;
 
   @override
   Widget build(BuildContext context) {
@@ -87,16 +89,37 @@ class _InputPageState extends State<InputPage> {
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
-                            Text( height.toString(),
+                            Text(
+                              height.toString(),
                               style: kNumberStyle,
                             ),
-                            const Text('cm',style: kLabelTextStyle,),
+                            const Text(
+                              'cm',
+                              style: kLabelTextStyle,
+                            ),
                           ],
                         ),
-                        Slider(
-                          value: height.toDouble(),
-                          min: 180.0,
-                          max: 220.0, onChanged: (double value) {  },
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            thumbColor: kSliderActiveColor,
+                            inactiveTrackColor: kSliderInactiveColor,
+                            activeTrackColor: Colors.white,
+                            overlayColor: const Color(0x29EB1555),
+                            thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 15.0),
+                            overlayShape: const RoundSliderOverlayShape(
+                                overlayRadius: 30.0),
+                          ),
+                          child: Slider(
+                            value: height.toDouble(),
+                            min: kMinSliderValue,
+                            max: kMaxSliderValue,
+                            onChanged: (double newValue) {
+                              setState(() {
+                                height = newValue.round();
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -111,13 +134,65 @@ class _InputPageState extends State<InputPage> {
                       child: ReuseContainer(
                     onPress: () {},
                     myColor: kInactiveContainerColor,
-                    cardChild: Column(),
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "WEIGHT",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   )),
                   Expanded(
                       child: ReuseContainer(
                     onPress: () {},
                     myColor: kInactiveContainerColor,
-                    cardChild: Column(),
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "AGE",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   )),
                 ],
               ),
@@ -130,5 +205,24 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         ));
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  const RoundIconButton({Key? key, required this.icon}) : super(key: key);
+  final IconData icon;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      onPressed: () {},
+      elevation: 6.0,
+      constraints: const BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: const CircleBorder(),
+      fillColor: kActiveContainerColor,
+    );
   }
 }
