@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bottom_button.dart';
 import 'constants.dart';
 
 class ResultsPage extends StatelessWidget {
@@ -11,7 +12,41 @@ class ResultsPage extends StatelessWidget {
         title: const Text("BMI CALCULATOR"),
         backgroundColor: kAppBarColor,
       ),
-      body: const Text("Hello World!"),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Expanded(
+            child: Text("Your Result", style: kTitleTextStyle),
+          ),
+          Expanded(
+            flex: 6,
+            child: Container(
+              margin: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: kResultContainerColor,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Text("Normal", style: kResultTextStyle),
+                  Text("22.0", style: kBMITextStyle),
+                  Text(
+                      "Your BMI result is normal and great. You are doing Great.",
+                      textAlign: TextAlign.center,
+                      style: kBodyTextStyle),
+                ],
+              ),
+            ),
+          ),
+          BottomButton(
+              buttonTitle: "RE-CALCULATE",
+              onTab: () {
+                Navigator.pop(context);
+              })
+        ],
+      ),
     );
   }
 }
