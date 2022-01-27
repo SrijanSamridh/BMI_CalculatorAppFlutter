@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import 'package:bmi_calculator_app/constants.dart';
 
 class RoundIconButton extends StatelessWidget {
   const RoundIconButton({Key? key, required this.icon, required this.onPressed})
