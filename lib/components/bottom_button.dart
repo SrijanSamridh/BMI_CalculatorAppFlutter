@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({Key? key, required this.onTab, required this.buttonTitle}) : super(key: key);

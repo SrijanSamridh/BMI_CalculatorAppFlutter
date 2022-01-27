@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'bottom_button.dart';
-import 'constants.dart';
+import 'package:bmi_calculator_app/components/bottom_button.dart';
+import 'package:bmi_calculator_app/constants.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({Key? key}) : super(key: key);
