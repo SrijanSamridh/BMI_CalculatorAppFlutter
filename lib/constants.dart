@@ -16,4 +16,12 @@ const kLabelTextStyle = TextStyle(
   color: kFontColor,
 );
 
-const kNumberStyle = TextStyle(fontWeight: FontWeight.w900, fontSize: 45.0,);
+const kNumberStyle = TextStyle(
+  fontWeight: FontWeight.w900,
+  fontSize: 45.0,
+);
+
+const kLargeButtonTextStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);

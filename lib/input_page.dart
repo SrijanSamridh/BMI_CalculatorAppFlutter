@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reuse_container.dart';
 import 'constants.dart';
+import 'results_page.dart';
 
 enum Gender { male, female }
 
@@ -149,7 +150,7 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RoundIconButton(
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
                                   weight--;
                                 });
@@ -160,11 +161,11 @@ class _InputPageState extends State<InputPage> {
                               width: 10.0,
                             ),
                             RoundIconButton(
-                              onPressed: (){
-                                  setState(() {
-                                    weight++;
-                                  });
-                                },
+                              onPressed: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
                               icon: FontAwesomeIcons.plus,
                             ),
                           ],
@@ -189,10 +190,10 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:[
+                          children: [
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
                                   age--;
                                 });
@@ -217,16 +218,26 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              child: const Center(
-                child: Text("CALCULATE BMI",
-                  style: TextStyle(fontSize: 24.0,),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ResultsPage()),
+                );
+              },
+              child: Container(
+                child: const Center(
+                  child: Text(
+                    "CALCULATE",
+                    style: kLargeButtonTextStyle,
+                  ),
                 ),
+                color: kBottomContainerColor,
+                margin: const EdgeInsets.only(top: 10.0),
+                height: kBottomContainerHeight,
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 20.0),
               ),
-              color: kBottomContainerColor,
-              margin: const EdgeInsets.only(top: 10.0),
-              height: kBottomContainerHeight,
-              width: double.infinity,
             ),
           ],
         ));
@@ -234,7 +245,8 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key, required this.icon, required this.onPressed}) : super(key: key);
+  const RoundIconButton({Key? key, required this.icon, required this.onPressed})
+      : super(key: key);
   // const RoundIconButton({ this.onPressed})
   final IconData icon;
   final VoidCallback onPressed;
