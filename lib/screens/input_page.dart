@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator_app/components/icon_content.dart';
 import 'package:bmi_calculator_app/components/reuse_container.dart';
 import 'package:bmi_calculator_app/components/bottom_button.dart';
+import 'package:bmi_calculator_app/components/round_icon_button.dart';
 import 'package:bmi_calculator_app/constants.dart';
 import 'results_page.dart';
 
@@ -233,24 +234,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key, required this.icon, required this.onPressed})
-      : super(key: key);
-  // const RoundIconButton({ this.onPressed})
-  final IconData icon;
-  final VoidCallback onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      onPressed: onPressed,
-      elevation: 6.0,
-      constraints: const BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: const CircleBorder(),
-      fillColor: kActiveContainerColor,
-    );
-  }
-}
